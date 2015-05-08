@@ -271,7 +271,7 @@ void init_td_api()
 	{
 		cCpuFreqManager f;
 		f.SetCpuFreq(0);	/* CPUFREQ == 0 is the trigger for leaving standby */
-#ifdef BOXMODEL_SPARK7162
+#if HAVE_SPARK_HARDWARE
 		create_input_devices();
 		start_inmux_thread();
 #endif
@@ -294,7 +294,7 @@ void init_td_api()
 			close(dmx);
 		}
 	}
-#ifdef BOXMODEL_SPARK7162
+#if HAVE_SPARK_HARDWARE
 	else
 		reopen_input_devices();
 #endif
@@ -305,7 +305,7 @@ void init_td_api()
 void shutdown_td_api()
 {
 	lt_info("%s, initialized = %d\n", __FUNCTION__, (int)initialized);
-#ifdef BOXMODEL_SPARK7162
+#if HAVE_SPARK_HARDWARE
 	if (initialized) {
 		stop_inmux_thread();
 		close_input_devices();
